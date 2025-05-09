@@ -456,12 +456,12 @@ header h1 a:hover {
     top: var(--spacing-md);
     left: 50%;
     transform: translateX(-50%);
-    display: flex;
+    display: none;
     border: 2px solid var(--border-light);
     background-color: var(--panel-bg-darker);
     border-radius: var(--border-radius-standard);
     padding: var(--spacing-xs);
-    z-index: 90;
+    z-index: -5;
     box-shadow: var(--shadow-standard);
 }
 
@@ -528,6 +528,7 @@ header h1 a:hover {
 /* Menu container */
 .menu-container {
     position: relative;
+    z-index: 6;
 }
 
 .menu-button {
@@ -1870,36 +1871,39 @@ footer {
     font-size: 0.9rem;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .thread-container {
-        padding: 25px;
-        margin: 20px 15px;
-        border-radius: 20px;
-    }
-    
-    .message-bubble {
-        max-width: 85%;
-        padding: 15px;
-    }
-    
-    .thread-header h3 {
-        font-size: 1.2rem;
-    }
+/* Mobile-specific styling */
+.mobile-search-toggle {
+    display: none;
+    position: fixed;
+    top: 80px;
+    left: 15px;
+    z-index: 100;
+    background-color: var(--panel-bg-darker);
+    padding: 10px;
+    border-radius: var(--border-radius-standard);
+    box-shadow: var(--shadow-standard);
+    cursor: pointer;
+    color: var(--color-text-primary);
+    font-size: 20px;
 }
 
-@media (max-width: 480px) {
-    .thread-container {
-        padding: 20px 15px;
-        margin: 15px 10px;
+@media (max-width: 600px) {
+    .mobile-search-toggle {
+        display: none;
     }
-    
-    .message-bubble {
-        max-width: 90%;
-        padding: 12px;
+
+    .search-container {
+        display: none;
+        flex-direction: column;
+        width: 90%;
+        top: 120px;
     }
-    
-    .message-content {
-        font-size: 0.95rem;
+
+
+    .search-container.active {
+        display: flex;
+    }
+    .toolbar{
+        flex-direction: row;
     }
 }

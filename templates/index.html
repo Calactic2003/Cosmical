@@ -50,13 +50,15 @@
         </div>
         <h1><a href="/">Cosmical</a></h1>
     </header>
-    
-    <div class="search-container">
+
+    <div class="mobile-search-toggle" onclick="toggleMobileSearch()">
+        <i class="fas fa-search"></i>
+    </div>
+
+    <div class="search-container" >
         <form action="/search" method="POST"> 
         {% csrf_token %}
         <input type="text" id="searchInput" placeholder="Search..." aria-label="Search" name="username">
-        <button onclick="redirectToPage()">Search</button>
-        <ul id="searchResults" class="search-results"></ul>
         </form>
     </div>
     
@@ -68,7 +70,7 @@
 
         <div class="notification-btn" id="uplnotificationButton">
             <i class="fas fa-bell"></i>
-            <span class="notification-badge">{{ notifications.count }}</span>
+            <span class="notification-badge">4</span>
         </div>        
         <div class="your-profile" id="profileButton">
             <div class="profile_icon">
@@ -296,5 +298,12 @@
     </footer>
     
     <script src="{% static 'javascript/javascript.js' %}"></script>
+    <script>
+function toggleMobileSearch() {
+    const container = document.querySelector('.search-container');
+    container.classList.toggle('active');
+}
+</script>
+
 </body>
 </html>
