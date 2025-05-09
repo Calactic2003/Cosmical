@@ -1,0 +1,244 @@
+:root {
+    --primary-color: #000000;
+    --secondary-color: #3a5795;
+    --background-color: #f5f7fa;
+    --text-color: #333;
+    --border-color: #ddd;
+    --success-color: #4caf50;
+    --danger-color: #f44336;
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.settings-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.settings-header h1 {
+    font-size: 24px;
+    color: var(--primary-color);
+}
+
+.settings-wrapper {
+    display: flex;
+    gap: 30px;
+}
+
+.settings-sidebar {
+    width: 250px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 20px;
+    flex-shrink: 0;
+}
+
+.sidebar-nav {
+    list-style: none;
+}
+
+.sidebar-nav li {
+    margin-bottom: 10px;
+}
+
+.sidebar-nav a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: var(--text-color);
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.sidebar-nav a:hover {
+    background-color: rgba(74, 118, 168, 0.1);
+}
+
+.sidebar-nav a.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.settings-content {
+    flex-grow: 1;
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 30px;
+}
+
+.settings-section {
+    margin-bottom: 40px;
+}
+
+.settings-section h2 {
+    margin-bottom: 20px;
+    color: var(--primary-color);
+    font-size: 20px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+}
+
+.btn-danger:hover {
+    background-color: #d32f2f;
+}
+
+.image-upload-container {
+    margin-bottom: 20px;
+}
+
+.profile-pic-preview {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary-color);
+    background-color: #e9ecef;
+}
+
+.banner-preview {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: #e9ecef;
+}
+
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    margin-top: 15px;
+}
+
+.upload-btn {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    background-color: white;
+    padding: 8px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.upload-btn-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.privacy-option {
+    margin-bottom: 15px;
+}
+
+.success-message, .error-message {
+    padding: 12px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    display: none;
+}
+
+.success-message {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: var(--success-color);
+    border: 1px solid var(--success-color);
+}
+
+.error-message {
+    background-color: rgba(244, 67, 54, 0.1);
+    color: var(--danger-color);
+    border: 1px solid var(--danger-color);
+}
+
+@media (max-width: 768px) {
+    .settings-wrapper {
+        flex-direction: column;
+    }
+
+    .settings-sidebar {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .sidebar-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .sidebar-nav li {
+        margin-bottom: 0;
+    }
+}

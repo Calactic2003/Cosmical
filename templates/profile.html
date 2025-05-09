@@ -1,0 +1,433 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - {{user_profile.user.username}}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profilestyles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" href="{% static 'icons/favicon.png' %}" type="image/png">
+</head>
+<body>
+    <div class="nebula-background">
+        <div class="nebula-layer nebula-blue"></div>
+        <div class="nebula-layer nebula-purple"></div>
+        <div class="nebula-layer nebula-teal"></div>
+    </div>
+    <div class="stars-overlay"></div>
+    <div class="dust-particles"></div>
+    <header>        
+        <div class="menu-container">
+            <div class="menu-button" aria-label="Toggle menu" onclick="toggleMenu()">
+                <img src="{% static 'icons/whitehammenu.png' %}" alt="Menu" class="hamburgerbutton">
+            </div>
+            <div class="menu" id="sideMenu">
+                <ul>
+                    <li class="option"><a href="/">Home<img src="{% static 'icons/home_icon.png' %}" class="menu_icon" alt="Home"></a></li>
+                    <li class="option"><a href="feed.html">Feed<img src="{% static 'icons/feed_icon.png' %}" class="menu_icon" alt="Feed"></a></li>
+                    <li class="option"><a href="/profile/{{ user.username }}">Your profile<img src="{{user_profile.profileimg.url}}" class="sub_icon" alt="Profile"></a></li>
+                    <li class="break"></li>
+                    <p>Subscriptions</p>
+                    {% if subscriptions %}
+                        {% for sub in subscriptions %}
+                            <li class="option">
+                                <a href="/profile/{{ sub.username }}">
+                                    {{ sub.username }}
+                                    <img src="{{ sub.profile_img }}" class="sub_icon" alt="Profile">
+                                </a>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <li class="option">
+                            <p>No subscriptions yet</p>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <h1><a href="/">Cosmical</a></h1>
+    </header>
+    
+    <div class="search-container">
+        <form action="/search" method="POST"> 
+        {% csrf_token %}
+        <input type="text" id="searchInput" placeholder="Search..." aria-label="Search" name="username">
+        <button onclick="redirectToPage()">Search</button>
+        <ul id="searchResults" class="search-results"></ul>
+        </form>
+    </div>
+    
+    <div class="toolbar">
+
+        <div class="notification-btn" id="uplnotificationButton">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+        </div>        
+        <div class="your-profile" id="profileButton">
+            <div class="profile_icon">
+                <img src="{{ user_profile.profileimg.url|default:'/static/images/profileimage.png' }}" id="your_profile_image" class="home_profile_icon" alt="Profile">
+            </div>
+        </div>
+    </div>
+    
+    <!-- Hidden Upload Box -->
+    <div id="uploadBox" style="display: none; position: absolute; top: 60px; left: 20px; background: white; border: 1px solid #ccc; padding: 20px; z-index: 100;">
+        <form action="{% url 'upload' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label>Select Image:</label><br>
+            <input type="file" name="image_upload" accept="image/*"><br><br>
+            
+            <label>Caption:</label><br>
+            <input type="text" name="caption" style="width: 100%;"><br><br>
+            
+            <label>Tags (comma separated):</label><br>
+            <input type="text" name="tags" style="width: 100%;"><br><br>
+            
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+
+
+    <!-- Profile Icon Menu with Authentication Logic -->
+    <div id="profile-icon-menu" class="profile-icon-menu">
+        {% if user.is_authenticated %}
+            <ul>
+                <li><a href="/profile/{{ user.username }}">Your Profile</a></li>
+                <li><a href="/settings">Account Settings</a></li>
+                <li><a href="/saved">Saved Posts</a></li>
+                <li><a href="/notifications">Notifications</a></li>
+                <li class="separator"></li>
+                <li><a href="/logout">Log Out</a></li>
+                <li><a href="/help">Help Center</a></li>
+            </ul>
+        {% else %}
+            <ul>
+                <li><a href="/login">Log In</a></li>
+                <li><a href="/register">Register</a></li>
+                <li><a href="/help">Help Center</a></li>
+            </ul>
+        {% endif %}
+    </div>
+
+    <!-- User Profile Section -->
+    <div class="profile-section">
+        <div class="profile-header">
+            <div class="profile-cover-container">
+                <div class="profile-cover-image">
+                    <img src="{{ user_profile.bannerimg.url|default:'/static/icons/profile_icon.png' }}" alt="Cover Image">
+                </div>
+                <div class="profile-actions">
+                    <form action="{% url 'follow' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{user.username}}" name="follower" />
+                        <input type="hidden" value="{{user_object.username}}" name="user" />
+                        {% if user_object.username == user.username %}
+                        <button class="profile-action-btn">
+                            <a href="/settings" class="settings-link">Account Settings</a>
+                        </button>
+                        {% else %}
+                        <button class="profile-action-btn" type="submit">{{button_text}}</button>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+            
+            <div class="profile-info-container">
+                <div class="profile-avatar-container">
+                    <img src="{{ user_profile.profileimg.url|default:'/static/icons/profile_icon.png' }}" class="profile-avatar" alt="Profile Avatar">
+                    <h2 class="profile-username">@{{ user_profile.user.username }}</h2>
+                </div>
+                
+                <div class="profile-stats">
+                    <div class="stat-box">
+                        <span class="stat-count">{{ user_post_length }}</span>
+                        <span class="stat-label">&nbspPosts</span>
+                    </div>
+                    <div class="stat-box">
+
+                        <span class="stat-count">{{user_followers}}</span>
+                        {% if user_followers == 1 %}
+                        <span class="stat-label">&nbspSubscriber</span>
+                        {% else %}
+                        <span class="stat-label">&nbspSubscribers</span>
+                        {% endif %}
+
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-count">{{user_following}}</span>
+                        <span class="stat-label">&nbspSubscribed</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="profile-bio">
+            <p>{{ user_profile.bio|default:"No bio yet. Tell the cosmos about yourself!" }}</p>
+            <div class="profile-meta">
+                <span class="profile-location">📍 {{ user_profile.location|default:"Earth" }}</span>
+                <span class="profile-joined">🚀 Joined: {{ user_profile.date_joined|date:"F Y" }}</span>
+            </div>
+        </div>
+        
+        <div class="profile-navigation">
+            <ul>
+                <li class="active"><a href="#posts">Posts</a></li>
+                <li><a href="#media">Media</a></li>
+                <li><a href="#likes">Likes</a></li>
+                <li><a href="#collections">Collections</a></li>
+            </ul>
+        </div>
+    </div>
+
+    {% if user.username == user_object.username %}
+    <div class="create-post">
+        <div class="create-post-container">
+            <form action="{% url 'upload' %}" method="POST" enctype="multipart/form-data" class="create-post-form">
+                {% csrf_token %}
+                <div class="create-post-top">
+                    <textarea id="caption-textarea" name="caption" class="create-post-textarea" placeholder="What's happening?" maxlength="280" required></textarea>
+                </div>
+                <div class="create-post-bottom">
+                    <label for="image-upload" class="image-upload-label">📷 Add Image</label>
+                    <input type="file" id="image-upload" name="image_upload" accept="image/*" class="image-upload-input">
+                    <button type="submit" class="submit-post-button">Post</button>
+                </div>
+                <div id="image-preview-container" style="display:none; margin-top: 10px;">
+                    <img id="image-preview" src="#" alt="Image Preview" style="max-width: 100%; border-radius: var(--border-radius-standard);"/>
+                </div>                
+            </form>
+        </div>
+    </div>
+    {% endif %}
+
+
+<!-- Add this right after your profile-navigation div -->
+<!-- Replace the posts-feed div with this updated version that includes tab content -->
+<div class="posts-feed">
+    <!-- Tab content containers -->
+    <div id="posts-tab" class="tab-content active">
+        <div class="posts-feed-container">
+            {% if user_posts %}
+                {% for post in user_posts %}
+                <div class="post-card">
+                    <div class="post-card-header">
+                        <img src="{{ user_profile.profileimg.url|default:'/static/images/profileimage.png' }}" class="post-avatar">
+                        <div class="post-user-info">
+                            <a href="/profile/{{post.user}}">
+                                <span class="post-username">@{{post.user}}</span>
+                            </a>
+                            <span class="post-time">{{ post.created_at|date:"M d, Y" }}</span>
+                        </div>
+                        <!-- Post Settings Button -->
+                        <button class="post-settings-button" aria-label="Post settings" data-post-id="{{ post.id }}">
+                            <i class="fas fa-ellipsis-vertical"></i>
+                        </button>
+                        <!-- Post Settings Dropdown -->
+                        <div class="post-settings-dropdown" id="post-settings-{{ post.id }}">
+                            <ul>
+                                {% if post.user == user.username %}
+                                <!-- Options for post owner -->
+                                <li class="edit-post" data-post-id="{{ post.id }}"><i class="fas fa-edit"></i> Edit Post</li>
+                                <li class="delete-post" data-post-id="{{ post.id }}"><i class="fas fa-trash danger"></i> Delete Post</li>
+                                <li class="separator"></li>
+                                {% endif %}
+                                <!-- Options for all users -->
+                                <li class="save-post" data-post-id="{{ post.id }}"><i class="fas fa-bookmark"></i> Save Post</li>
+                                <li class="copy-link" data-post-id="{{ post.id }}"><i class="fas fa-link"></i> Copy Link</li>
+                                <li class="separator"></li>
+                                <li class="report-post" data-post-id="{{ post.id }}"><i class="fas fa-flag danger"></i> Report Post</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="post-card-body">
+                        <p class="post-caption">{{ post.caption }}</p>
+                        {% if post.image %}
+                        <div class="post-image-container">
+                            <a href="{{post.image.url}}">
+                                <img src="{{ post.image.url }}" alt="Post Image" class="post-image">
+                            </a>
+                            <a href="{{post.image.url}}" download class="download-icon" title="Download image">
+                                <i class="fas fa-download"></i>
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="post-card-footer">
+                        <a href="/like-post?post_id={{post.id}}">
+                            <button class="like-button {% if post.id|stringformat:'s' in liked_posts %}liked{% endif %}">
+                                <i class="fas fa-heart"></i>
+                                <span class="like-count">{{post.no_of_likes}}</span>
+                            </button>
+                        </a>
+                        <button class="comment-button">
+                            <i class="fas fa-comment"></i>
+                        </button>
+                    </div>
+                </div>
+                <br>
+                {% endfor %}
+            {% else %}
+                <div class="no-posts-message">
+                    {% if user.username == user_object.username %}
+                        <p>You haven't made any posts yet. Share something with the cosmos!</p>
+                        <button class="create-first-post-btn">Create Your First Post</button>
+                    {% else %}
+                        <p>{{ user_object.username }} hasn't made any posts yet.</p>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Media tab content -->
+    <div id="media-tab" class="tab-content">
+        <div class="media-grid-container">
+            {% if user_media_posts %}
+                <div class="media-grid">
+                    {% for post in user_media_posts %}
+                    <div class="media-item">
+                        <a href="/profile/{{post.user}}/post/{{post.id}}" class="media-link">
+                            <img src="{{ post.image.url }}" alt="Media post by {{post.user}}" class="media-thumbnail">
+                            <div class="media-overlay">
+                                <div class="media-stats">
+                                    <span><i class="fas fa-heart"></i> {{post.no_of_likes}}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="no-media-message">
+                    {% if user.username == user_object.username %}
+                        <p>You haven't shared any images yet.</p>
+                        <button class="create-first-post-btn">Share Your First Image</button>
+                    {% else %}
+                        <p>{{ user_object.username }} hasn't shared any images yet.</p>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Likes tab content - Placeholder for now -->
+    <div id="likes-tab" class="tab-content">
+        <div class="likes-container">
+            <p>Liked posts will appear here.</p>
+        </div>
+    </div>
+
+    <!-- Collections tab content - Placeholder for now -->
+    <div id="collections-tab" class="tab-content">
+        <div class="collections-container">
+            <p>Collections will appear here.</p>
+        </div>
+    </div>
+</div>
+
+    
+
+    <footer>
+        <p>&copy; 2024 Cosmical. All rights reserved.</p>
+    </footer>
+    
+    <script src="{% static 'javascript/javascript.js' %}"></script>
+    <script>
+        // Additional JavaScript for profile page functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab navigation
+            const navItems = document.querySelectorAll('.profile-navigation li');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+                // Add this to your script section in profile.html
+document.addEventListener('DOMContentLoaded', function() {
+    // Tab navigation
+    const navItems = document.querySelectorAll('.profile-navigation li');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    navItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Get the tab ID from the href attribute
+            const targetId = this.querySelector('a').getAttribute('href').substring(1);
+            const targetTab = document.getElementById(targetId + '-tab');
+            
+            // Remove active class from all tabs and nav items
+            navItems.forEach(nav => nav.classList.remove('active'));
+            tabContents.forEach(tab => tab.classList.remove('active'));
+            
+            // Add active class to current tab and nav item
+            this.classList.add('active');
+            if (targetTab) {
+                targetTab.classList.add('active');
+            }
+        });
+    });
+    // Set posts tab as active by default
+    document.getElementById('posts-tab').classList.add('active');
+});
+            /*
+            // Edit profile button
+            const editProfileBtn = document.querySelector('.profile-action-btn');
+            if (editProfileBtn) {
+                editProfileBtn.addEventListener('click', function() {
+                    // Redirect to edit profile page or show modal
+                    // window.location.href = '/edit-profile';
+                    alert('Edit profile functionality coming soon!');
+                });
+            }*/
+            
+            // Create first post button (if visible)
+            const createFirstPostBtn = document.querySelector('.create-first-post-btn');
+            if (createFirstPostBtn) {
+                createFirstPostBtn.addEventListener('click', function() {
+                    // Scroll to create post section or focus on it
+                    window.scrollTo({
+                        top: document.querySelector('.create-post').offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+            
+            // Image preview functionality
+            const imageInput = document.getElementById('image-upload');
+            const imagePreview = document.getElementById('image-preview');
+            const previewContainer = document.getElementById('image-preview-container');
+            
+            if (imageInput) {
+                imageInput.addEventListener('change', function() {
+                    if (this.files && this.files[0]) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            imagePreview.src = e.target.result;
+                            previewContainer.style.display = 'block';
+                        }
+                        reader.readAsDataURL(this.files[0]);
+                    }
+                });
+            }
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            const createPostBtn = document.querySelector('.create-first-post-btn');
+            const captionTextarea = document.getElementById('caption-textarea');
+    
+            if (createPostBtn && captionTextarea) {
+                createPostBtn.addEventListener('click', function () {
+                    captionTextarea.focus();
+                    captionTextarea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
+            }
+        });   
+    </script>
+</body>
+</html>

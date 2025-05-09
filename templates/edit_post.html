@@ -1,0 +1,252 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="edit-post-form">
+        <h2>Edit Post</h2>
+        
+        <form action="{% url 'edit-post' post.id %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="caption">Caption:</label>
+                <textarea name="caption" class="caption-textarea" placeholder="What's happening?" maxlength="280" required>{{ post.caption }}</textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Current Image:</label>
+                {% if post.image %}
+                <div class="current-image-container">
+                    <img src="{{ post.image.url }}" alt="Current Post Image" class="current-image">
+                </div>
+                {% else %}
+                <p class="no-image-message">No image attached to this post</p>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label for="image-upload">Change Image (optional):</label>
+                <div class="image-upload-area">
+                    <label for="image-upload" class="image-upload-label">
+                        <i class="fas fa-camera"></i> Choose New Image
+                    </label>
+                    <input type="file" id="image-upload" name="image_upload" accept="image/*" class="image-upload-input">
+                </div>
+                
+                <div id="image-preview-container" style="display:none; margin-top: 10px;">
+                    <p>New image preview:</p>
+                    <img id="image-preview" src="#" alt="Image Preview" class="image-preview"/>
+                    <button type="button" id="remove-preview" class="remove-preview-btn">
+                        <i class="fas fa-times"></i> Remove
+                    </button>
+                </div>
+            </div>
+            
+            <div class="form-buttons">
+                <a href="/" class="cancel-button">Cancel</a>
+                <button type="submit" class="submit-button">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .edit-post-form {
+        background-color: rgba(30, 35, 60, 0.8);
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .edit-post-form h2 {
+        color: #fff;
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #fff;
+        font-size: 0.9rem;
+    }
+    
+    .caption-textarea {
+        width: 100%;
+        min-height: 100px;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background-color: rgba(20, 25, 45, 0.8);
+        color: #fff;
+        font-size: 0.9rem;
+        resize: vertical;
+    }
+    
+    .caption-textarea:focus {
+        outline: none;
+        border-color: rgba(100, 130, 255, 0.6);
+        box-shadow: 0 0 0 2px rgba(100, 130, 255, 0.2);
+    }
+    
+    .current-image-container {
+        margin-top: 10px;
+        max-width: 100%;
+        max-height: 300px;
+        overflow: hidden;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .current-image {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    
+    .no-image-message {
+        color: rgba(255, 255, 255, 0.6);
+        font-style: italic;
+        margin-top: 10px;
+    }
+    
+    .image-upload-area {
+        margin-top: 10px;
+    }
+    
+    .image-upload-label {
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: rgba(100, 130, 255, 0.3);
+        color: #fff;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    
+    .image-upload-label:hover {
+        background-color: rgba(100, 130, 255, 0.5);
+    }
+    
+    .image-upload-input {
+        display: none;
+    }
+    
+    #image-preview-container {
+        margin-top: 15px;
+        position: relative;
+    }
+    
+    #image-preview-container p {
+        color: #fff;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+    }
+    
+    .image-preview {
+        max-width: 100%;
+        max-height: 200px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .remove-preview-btn {
+        position: absolute;
+        top: 30px;
+        right: 10px;
+        background-color: rgba(0, 0, 0, 0.6);
+        border: none;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.8rem;
+    }
+    
+    .remove-preview-btn:hover {
+        background-color: rgba(255, 60, 60, 0.8);
+    }
+    
+    .form-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+    }
+    
+    .cancel-button,
+    .submit-button {
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    
+    .cancel-button {
+        background-color: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: #fff;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .cancel-button:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .submit-button {
+        background-color: rgba(100, 130, 255, 0.7);
+        border: none;
+        color: #fff;
+    }
+    
+    .submit-button:hover {
+        background-color: rgba(100, 130, 255, 0.9);
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const imageUpload = document.getElementById('image-upload');
+        const imagePreview = document.getElementById('image-preview');
+        const previewContainer = document.getElementById('image-preview-container');
+        const removePreviewBtn = document.getElementById('remove-preview');
+        
+        // Preview image when selected
+        imageUpload.addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    previewContainer.style.display = 'block';
+                }
+                
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+        
+        // Remove image preview
+        removePreviewBtn.addEventListener('click', function() {
+            imageUpload.value = '';
+            previewContainer.style.display = 'none';
+        });
+    });
+</script>
+{% endblock %}

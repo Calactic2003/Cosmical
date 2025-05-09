@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmical - Feed</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>  
+        <div class="menu-container">
+        <div class="menu-button" onclick="toggleMenu()">
+            <img src="icons/whitehammenu.png" alt="Hamburger Button" class="hamburgerbutton">
+        </div>
+        
+        <div class="menu">
+          <!-- Your menu items here -->
+          <ul>
+            <li class = "option"><a href="index.html">Home<img src="icons/home_icon.png" class = "menu_icon"></a></li>
+
+            <li class = "option"><a href="feed.html">Feed<img src="icons/feed_icon.png" class = "menu_icon"></a></li>
+
+            <li class = "option"><a href="userwall.html">Your profile<img src="icons/profile_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="forums.html">Forums<img src="icons/forums_icon.png" class = "menu_icon"></a></li>
+
+            <li class = "break"></li>
+            <p>Topics</p>
+            <li class = "option">
+                <a href="astronomy.html">Astronomy<img src="icons/astronomy_icon.png" class = "menu_icon"></a>
+
+            </li>
+            <li class = "option">
+                <a href="physics.html">Physics<img src="icons/physics_icon.png" class = "menu_icon"></a>
+            </li>
+            <li class = "option"><a href="cosmology.html">Cosmology<img src="icons/cosmology_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="planetary_science.html">Planetary Science<img src="icons/planetary_science_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="computer_science.html">Computer Science<img src="icons/computer_science_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="engineering.html">Engineering<img src="icons/engineering_icon.png" class = "menu_icon"></a></li>
+
+            <li class = "break"></li>
+            <p>Subscriptions</p>
+            <li class = "option"><a href="#">Callum<img src="icons/profile_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="#">Cameron<img src="icons/profile_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="#">Jay<img src="icons/profile_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="#">Cooper<img src="icons/profile_icon.png" class = "menu_icon"></a></li>
+        </ul>
+        </div>
+      </div>
+        <h1><a href = 'index.html'> Cosmical</a></h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search...">
+            <button onclick="redirectToPage()">Search</button>
+        </div>
+        
+    
+        <ul id="searchResults"></ul>
+
+        <nav>
+            <ul class>
+                <li ><a href="feed.html" class = "tab">Feed</a></li>
+                <li ><a href="topics.html" class = "tab">Topics</a></li>
+                <li ><a href="#" class = "tab">Forums</a></li>
+                <li ><a href="aboutus.html" class = "tab">About</a></li>
+                <li ><a href="#" class = "tab">Contact</a></li>
+                <li class="profile-btn">
+                    <a href="#" class ="profile-btn-link">Profile</a>
+                    <div class="dropdown-content">
+                        <a href="userwall.html">User Wall</a>
+                        <a href="#">Settings</a>
+                        <a href="#">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="search-feed">
+        <section class="search-feed-result">
+            <div class="search-feed-video-post">
+                <img src="images/cosmology.jpg" class="feed-video-thumbnail">
+                <div class="search-feed-video-info">
+                    <h1>Video Title</h1>
+                    <h5>Video description. This video is about the fundamentals of Physics.</h5>
+                </div>
+            </div>
+            <div class="search-feed-video-post">
+                <img src="images/astronomy.jpg" class="feed-video-thumbnail">
+                <div class="search-feed-video-info">
+                    <h1>Video Title</h1>
+                    <h5>Video description. This video is about the fundamentals of Physics.</h5>
+                </div>
+            </div>
+            <div class="search-feed-video-post">
+                <img src="images/astrophysics.jpg" class="feed-video-thumbnail">
+                <div class="search-feed-video-info">
+                    <h1>Video Title</h1>
+                    <h5>Video description. This video is about the fundamentals of Physics.</h5>
+                </div>
+            </div>
+            
+        </section>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Cosmical. All rights reserved.</p>
+        <img src="icons/musiciconwhite.png" class = "music-icon"></p>
+    </footer>
+    <script src="javascript.js"></script>
+</body>
+</html>

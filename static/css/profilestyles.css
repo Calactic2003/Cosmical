@@ -1,0 +1,377 @@
+/* Profile Page Specific Styles - Add to your existing CSS file */
+
+/* Profile Section */
+.profile-section {
+    background-color: var(--panel-bg);
+    border: 1px solid var(--border-light);
+    border-radius: var(--border-radius-standard);
+    padding-bottom: var(--spacing-md);
+    margin: 80px auto var(--spacing-lg);
+    width: 90%;
+    max-width: 1200px;
+    box-shadow: var(--shadow-standard);
+    backdrop-filter: var(--blur-standard);
+    z-index: 2;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-header {
+    position: relative;
+    padding-bottom: var(--spacing-sm);
+}
+
+.profile-cover-container {
+    position: relative;
+}
+
+.profile-cover-image {
+    height: 180px;
+    overflow: hidden;
+    position: relative;
+}
+
+.profile-cover-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.8);
+}
+
+.profile-actions {
+    position: absolute;
+    bottom: -45px;
+    right: 10px;
+    display: flex;
+    gap: var(--spacing-md);
+    z-index: 4;
+}
+
+.profile-action-btn {
+    background-color: var(--color-accent);
+    color: var(--color-text-primary);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--border-radius-standard);
+    padding: 6px 12px;
+    font-size: var(--font-size-small);
+    cursor: pointer;
+    transition: all var(--transition-standard);
+    box-shadow: var(--shadow-button);
+}
+
+.profile-action-btn:hover {
+    background-color: var(--color-accent-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-button-hover);
+}
+.settings-link, 
+.settings-link:visited,
+.settings-link:hover,
+.settings-link:active {
+    color: inherit; /* or specify the exact same color you want */
+    text-decoration: none;
+}
+
+/* Or if your button text should be white */
+.profile-action-btn a,
+.profile-action-btn a:visited {
+    color: white; /* or whatever color your button text should be */
+    text-decoration: none;
+}
+.profile-info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -50px;
+}
+
+.profile-avatar-container {
+    position: relative;
+    text-align: center;
+    z-index: 3;
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: var(--border-radius-round);
+    border: 3px solid var(--panel-bg);
+    box-shadow: var(--shadow-standard);
+    object-fit: cover;
+    background-color: var(--panel-bg-darker);
+}
+
+.profile-username {
+    font-size: var(--font-size-large);
+    margin-top: var(--spacing-xs);
+    font-weight: 700;
+    text-shadow: var(--glow-text);
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-sm);
+    padding: 0 var(--spacing-md);
+}
+
+.stat-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.stat-count {
+    font-size: var(--font-size-normal);
+    font-weight: 700;
+}
+
+.stat-label {
+    font-size: var(--font-size-small);
+    color: var(--color-text-secondary);
+}
+
+.profile-bio {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    text-align: center;
+    margin-bottom: var(--spacing-xs);
+    border-bottom: 1px solid var(--border-very-subtle);
+}
+
+.profile-bio p {
+    margin-bottom: var(--spacing-sm);
+    font-size: var(--font-size-normal);
+    line-height: 1.4;
+}
+
+.profile-meta {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    font-size: var(--font-size-small);
+    color: var(--color-text-secondary);
+}
+
+.profile-location, .profile-joined {
+    font-size: var(--font-size-small);
+    color: var(--color-text-secondary);
+}
+
+.profile-navigation {
+    padding: 0 var(--spacing-md);
+}
+
+.profile-navigation ul {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    border-bottom: 1px solid var(--border-very-subtle);
+    margin-bottom: 0;
+}
+
+.profile-navigation li {
+    padding: var(--spacing-xs) var(--spacing-md);
+    position: relative;
+    cursor: pointer;
+    transition: color var(--transition-standard);
+}
+
+.profile-navigation li a {
+    text-decoration: none;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+    transition: color var(--transition-standard);
+}
+
+.profile-navigation li.active a {
+    color: var(--color-text-primary);
+}
+
+.profile-navigation li.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-text-primary);
+    border-radius: 2px 2px 0 0;
+}
+
+.profile-navigation li:hover a {
+    color: var(--color-text-primary);
+}
+
+.no-posts-message {
+    text-align: center;
+    padding: var(--spacing-lg);
+    background-color: var(--panel-bg-darker);
+    border-radius: var(--border-radius-standard);
+    margin: var(--spacing-md);
+}
+
+.no-posts-message p {
+    margin-bottom: var(--spacing-md);
+    font-size: var(--font-size-normal);
+    color: var(--color-text-secondary);
+}
+
+.create-first-post-btn {
+    background-color: var(--color-accent);
+    color: var(--color-text-primary);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--border-radius-standard);
+    padding: 8px 16px;
+    font-size: var(--font-size-normal);
+    cursor: pointer;
+    transition: all var(--transition-standard);
+    box-shadow: var(--shadow-button);
+}
+
+.create-first-post-btn:hover {
+    background-color: var(--color-accent-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-button-hover);
+}
+
+.share-button {
+    background: transparent;
+    border: none;
+    color: var(--color-text-primary);
+    font-size: var(--font-size-medium);
+    cursor: pointer;
+    transition: color var(--transition-standard);
+}
+
+.share-button:hover {
+    color: var(--color-highlight);
+}
+
+/* Media Queries */
+@media (max-width: 600px) {
+    .profile-stats {
+        gap: var(--spacing-md);
+    }
+    
+    .profile-navigation ul {
+        gap: var(--spacing-sm);
+    }
+    
+    .profile-navigation li {
+        padding: var(--spacing-xs) var(--spacing-xs);
+        font-size: var(--font-size-small);
+    }
+    
+    .profile-avatar {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .profile-cover-image {
+        height: 140px;
+    }
+    
+    .profile-actions {
+        bottom: 8px;
+        right: 8px;
+    }
+    
+    .profile-action-btn {
+        padding: 4px 8px;
+        font-size: var(--font-size-xs);
+    }
+}
+
+/* Add these styles to your profilestyles.css file */
+
+/* Tab content visibility */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Media Grid Styles */
+.media-grid-container {
+    width: 100%;
+    padding: 20px 0;
+}
+
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+    max-width: 100%;
+}
+
+.media-item {
+    position: relative;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.media-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.media-link {
+    display: block;
+    height: 100%;
+}
+
+.media-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.media-item:hover .media-overlay {
+    opacity: 1;
+}
+
+.media-item:hover .media-thumbnail {
+    transform: scale(1.05);
+}
+
+.media-stats {
+    color: white;
+    font-weight: 500;
+    display: flex;
+    gap: 20px;
+}
+
+.media-stats span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.no-media-message {
+    text-align: center;
+    padding: 40px 0;
+    color: #666;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .media-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 5px;
+    }
+}

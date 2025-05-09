@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmical - Physics</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>  
+        <div class="menu-container">
+        <div class="menu-button" onclick="toggleMenu()">
+            <img src="icons/whitehammenu.png" alt="Hamburger Button" class="hamburgerbutton">
+        </div>
+        
+        <div class="menu">
+          <!-- Your menu items here -->
+          <ul>
+            <li class = "option"><a href="index.html">Home<img src="icons/home_icon.png" class = "menu_icon"></a></li>
+
+            <li class = "option"><a href="feed.html">Feed<img src="icons/feed_icon.png" class = "menu_icon"></a></li>
+
+            <li class = "option"><a href="userwall.html">Your profile<img src="icons/profile_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="forums.html">Forums<img src="icons/forums_icon.png" class = "menu_icon"></a></li>
+
+            <li class = "break"></li>
+            <p>Topics</p>
+            <li class = "option">
+                <a href="astronomy.html">Astronomy<img src="icons/astronomy_icon.png" class = "menu_icon"></a>
+
+            </li>
+            <li class = "option">
+                <a href="physics.html">Physics<img src="icons/physics_icon.png" class = "menu_icon"></a>
+            </li>
+            <li class = "option"><a href="cosmology.html">Cosmology<img src="icons/cosmology_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="planetary_science.html">Planetary Science<img src="icons/planetary_science_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="computer_science.html">Computer Science<img src="icons/computer_science_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="engineering.html">Engineering<img src="icons/engineering_icon.png" class = "menu_icon"></a></li>
+
+            <li class = "break"></li>
+            <p>Subscriptions</p>
+            <li class = "option"><a href="#">Callum<img src="icons/profile_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="#">Cameron<img src="icons/profile_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="#">Jay<img src="icons/profile_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="#">Cooper<img src="icons/profile_icon.png" class = "menu_icon"></a></li>
+        </ul>
+        </div>
+      </div>
+        <h1><a href = 'index.html'> Cosmical</a></h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search...">
+            <button onclick="redirectToPage()">Search</button>
+        </div>
+        
+    
+        <ul id="searchResults"></ul>
+
+        <nav>
+            <ul class>
+                <li ><a href="feed.html" class = "tab">Feed</a></li>
+                <li ><a href="topics.html" class = "tab">Topics</a></li>
+                <li ><a href="#" class = "tab">Forums</a></li>
+                <li ><a href="aboutus.html" class = "tab">About</a></li>
+                <li ><a href="#" class = "tab">Contact</a></li>
+                <li class="profile-btn">
+                    <a href="#" class ="profile-btn-link">Profile</a>
+                    <div class="dropdown-content">
+                        <a href="userwall.html">User Wall</a>
+                        <a href="#">Settings</a>
+                        <a href="#">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="physics-home">
+        <h1>Planetary Science</h1>
+        <div class="break"></div>
+        <section class="physics-desc">
+            <p>
+                Planetary science is the interdisciplinary study of planets, moons, asteroids, comets, and other objects within our solar system and beyond. It encompasses a wide range of topics, including planetary formation, geology, atmospheres, climates, and potential for life.
+            </p>
+            <br>
+            <p>
+                Planetary scientists investigate the origin and evolution of planets and other celestial bodies, as well as the processes that shape their surfaces, interiors, and atmospheres. They use a variety of observational and analytical techniques, including spacecraft missions, remote sensing, laboratory experiments, and computer modeling, to explore the diverse worlds of our solar system and beyond.
+            </p>
+        </section>
+        <div class="break"></div>
+    
+        <ul class="physics-subsets">
+            <li><strong>Planetary Formation and Evolution:</strong> Explores the processes by which planets and other celestial bodies form from the primordial material of the solar nebula. It investigates the role of gravity, accretion, collisions, and differentiation in shaping the size, composition, and structure of planets and moons.</li>
+            <div class="break"></div>
+    
+            <li><strong>Planetary Geology:</strong> Studies the surface features, landforms, and geological processes of planets, moons, and other solid bodies in our solar system. It examines the formation and evolution of impact craters, volcanoes, mountains, valleys, and other geological features, as well as the role of tectonics, erosion, and weathering in shaping planetary landscapes.</li>
+            <div class="break"></div>
+    
+            <li><strong>Planetary Atmospheres and Climate:</strong> Investigates the composition, structure, and dynamics of planetary atmospheres, as well as the factors that influence climate and weather patterns on different worlds. It explores phenomena such as greenhouse effects, atmospheric circulation, storms, and atmospheric escape, as well as the potential for habitability on other planets and moons.</li>
+            <div class="break"></div>
+    
+            <li><strong>Planetary Exploration:</strong> Involves the design, development, and implementation of spacecraft missions to explore and study planets, moons, asteroids, and comets. It includes flyby, orbiter, lander, and rover missions that gather data on the surface, atmosphere, composition, and magnetic fields of celestial bodies, providing insights into their geological history and potential for life.</li>
+            <div class="break"></div>
+    
+            <li><strong>Extraterrestrial Life:</strong> Explores the possibility of life beyond Earth, both within our solar system and on exoplanets orbiting other stars. It investigates the conditions and environments that may support life, such as the presence of liquid water, organic molecules, and energy sources, and seeks evidence of microbial or intelligent life through astrobiology and SETI (Search for Extraterrestrial Intelligence) studies.</li>
+            <div class="break"></div>
+    
+            <li><strong>Planetary Rings and Satellites:</strong> Studies the rings, moons, and other natural satellites orbiting planets within our solar system. It investigates the formation and dynamics of planetary rings, the geological features and processes on moons, and the interactions between moons and their parent planets, providing insights into the history and evolution of planetary systems.</li>
+            <div class="break"></div>
+    
+            <li><strong>Planetary Dynamics and Orbital Mechanics:</strong> Examines the gravitational interactions, orbital dynamics, and stability of planetary systems, including the motion of planets, moons, asteroids, and comets. It explores phenomena such as orbital resonances, gravitational perturbations, and orbital mechanics, as well as the long-term evolution and stability of planetary orbits.</li>
+        </ul>
+    </section>
+    
+    
+    
+</section>     
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Cosmical. All rights reserved.</p>
+        <img src="icons/musiciconwhite.png" class = "music-icon"></p>
+    </footer>
+    <script src="javascript.js"></script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings</title>
+    <link rel="stylesheet" href="{% static 'css/settingsstyles.css' %}">
+
+</head>
+<body>
+    <div class="container">
+        <div class="settings-header">
+        <h1><a href = "/">Home</a> / Account Settings for <b>{{user.username}}</h1>
+            <button class="btn" id="save-all-settings" type = "submit">Save All Changes</button>
+        </div>
+
+        <div class="settings-wrapper">
+            <div class="settings-sidebar">
+                <ul class="sidebar-nav">
+                    <li><a href="#profile" class="active">Profile</a></li>
+                    <li><a href="#account">Account</a></li>
+                    <li><a href="#privacy">Privacy</a></li>
+                    <li><a href="#notifications">Notifications</a></li>
+                    <li><a href="#connected-accounts">Connected Accounts</a></li>
+                </ul>
+            </div>
+
+            <div class="settings-content">
+                <div id="success-message" class="success-message">
+                    Your settings have been saved successfully!
+                </div>
+                <div id="error-message" class="error-message">
+                    There was an error saving your settings. Please try again.
+                </div>
+
+                <form id="settings-form" action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="settings-section" id="profile">
+                        <h2>Profile Settings</h2>
+                        
+                        <div class="form-group">
+                            <label for="display-name">Display Name</label>
+                            <input type="text" id="display-name" name="display_name" value="{{ user.profile.display_name }}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" name="username" value="{{ user.username }}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="bio">Bio</label>
+                            <textarea id="bio" name="bio">{{user_profile.bio}}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Profile Picture</label>
+                            <div class="image-upload-container">
+                                <img id="profile-pic-preview" class="profile-pic-preview" src="{{ user_profile.profileimg.url|default:'/static/icons/profile_icon.png' }}" alt="Profile Picture">
+                                <div class="upload-btn-wrapper">
+                                    <button class="upload-btn" type="button">Choose Image</button>
+                                    <input type="file" id="profile-pic-upload" name="profile_pic" value="{{user_profile.profileimg}}" accept="image/*">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Banner Image</label>
+                            <div class="image-upload-container">
+                                <img id="banner-preview" class="banner-preview" src="{{ user.profile.bannerimg.url|default:'/static/images/default-banner.png' }}" alt="Banner Image">
+                                <div class="upload-btn-wrapper">
+                                    <button class="upload-btn" type="button">Choose Image</button>
+                                    <input type="file" id="banner-upload" name="banner_image" value="{{user_profile.bannerimg}}" accept="image/*">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" name="location" value="{{user.profile.location}}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="website">Website</label>
+                            <input type="text" id="website" name="website" value="{{ user.profile.website }}">
+                        </div>
+                    </div>
+                    
+                    <div class="settings-section" id="account">
+                        <h2>Account Settings</h2>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" value="{{ user.email }}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="current-password">Current Password</label>
+                            <input type="password" id="current-password" name="current_password">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="new-password">New Password</label>
+                            <input type="password" id="new-password" name="new_password">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirm-password">Confirm New Password</label>
+                            <input type="password" id="confirm-password" name="confirm_password">
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="button" class="btn btn-danger" id="deactivate-account">Deactivate Account</button>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-section" id="privacy">
+                        <h2>Privacy Settings</h2>
+                        
+                        <div class="form-group">
+                            <label>Profile Visibility</label>
+                            <div class="privacy-option">
+                                <input type="radio" id="public-profile" name="profile_visibility" value="public" {% if user.profile.visibility == 'public' %}checked{% endif %}>
+                                <label for="public-profile">Public - Anyone can view your profile</label>
+                            </div>
+                            <div class="privacy-option">
+                                <input type="radio" id="followers-only" name="profile_visibility" value="followers" {% if user.profile.visibility == 'followers' %}checked{% endif %}>
+                                <label for="followers-only">Followers Only - Only people who follow you can view your profile</label>
+                            </div>
+                            <div class="privacy-option">
+                                <input type="radio" id="private-profile" name="profile_visibility" value="private" {% if user.profile.visibility == 'private' %}checked{% endif %}>
+                                <label for="private-profile">Private - Only you can view your profile</label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Post Visibility Default</label>
+                            <div class="privacy-option">
+                                <input type="radio" id="public-posts" name="post_visibility_default" value="public" {% if user.profile.post_visibility_default == 'public' %}checked{% endif %}>
+                                <label for="public-posts">Public - Anyone can view your posts</label>
+                            </div>
+                            <div class="privacy-option">
+                                <input type="radio" id="followers-only-posts" name="post_visibility_default" value="followers" {% if user.profile.post_visibility_default == 'followers' %}checked{% endif %}>
+                                <label for="followers-only-posts">Followers Only - Only your followers can view your posts</label>
+                            </div>
+                            <div class="privacy-option">
+                                <input type="radio" id="private-posts" name="post_visibility_default" value="private" {% if user.profile.post_visibility_default == 'private' %}checked{% endif %}>
+                                <label for="private-posts">Private - Only you can view your posts</label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Who Can Send You Messages</label>
+                            <div class="privacy-option">
+                                <input type="radio" id="everyone-message" name="message_privacy" value="everyone" {% if user.profile.message_privacy == 'everyone' %}checked{% endif %}>
+                                <label for="everyone-message">Everyone</label>
+                            </div>
+                            <div class="privacy-option">
+                                <input type="radio" id="followers-message" name="message_privacy" value="followers" {% if user.profile.message_privacy == 'followers' %}checked{% endif %}>
+                                <label for="followers-message">Followers Only</label>
+                            </div>
+                            <div class="privacy-option">
+                                <input type="radio" id="nobody-message" name="message_privacy" value="nobody" {% if user.profile.message_privacy == 'nobody' %}checked{% endif %}>
+                                <label for="nobody-message">Nobody</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-section" id="notifications">
+                        <h2>Notification Settings</h2>
+                        
+                        <div class="form-group">
+                            <div class="privacy-option">
+                                <input type="checkbox" id="email-new-follower" name="notify_new_follower" {% if user.profile.notify_new_follower %}checked{% endif %}>
+                                <label for="email-new-follower">Email me when someone follows me</label>
+                            </div>
+                            <div class="privacy-option">
+                                <input type="checkbox" id="email-comment" name="notify_comment" {% if user.profile.notify_comment %}checked{% endif %}>
+                                <label for="email-comment">Email me when someone comments on my post</label>
+                            </div>
+                            <div class="privacy-option">
+                                <input type="checkbox" id="email-like" name="notify_like" {% if user.profile.notify_like %}checked{% endif %}>
+                                <label for="email-like">Email me when someone likes my post</label>
+                            </div>
+                            <div class="privacy-option">
+                                <input type="checkbox" id="email-message" name="notify_message" {% if user.profile.notify_message %}checked{% endif %}>
+                                <label for="email-message">Email me when I receive a message</label>
+                            </div>
+                            <div class="privacy-option">
+                                <input type="checkbox" id="email-newsletter" name="notify_newsletter" {% if user.profile.notify_newsletter %}checked{% endif %}>
+                                <label for="email-newsletter">Subscribe to newsletter and updates</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-section" id="connected-accounts">
+                        <h2>Connected Accounts</h2>
+                        
+                        <div class="form-group">
+                            <label>Connect with other social media accounts</label>
+                            <div class="privacy-option">
+                                <button type="button" class="btn" id="connect-facebook">
+                                    Connect Facebook
+                                </button>
+                            </div>
+                            <div class="privacy-option">
+                                <button type="button" class="btn" id="connect-twitter">
+                                    Connect Twitter
+                                </button>
+                            </div>
+                            <div class="privacy-option">
+                                <button type="button" class="btn" id="connect-google">
+                                    Connect Google
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="{%static 'javascript/settingsjs.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,155 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmical</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="icon" href="{% static 'icons/favicon.png' %}" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="nebula-background">
+        <div class="nebula-layer nebula-blue"></div>
+        <div class="nebula-layer nebula-purple"></div>
+        <div class="nebula-layer nebula-teal"></div>
+    </div>
+    <div class="stars-overlay"></div>
+    <div class="dust-particles"></div>
+    <header>        
+        <div class="menu-container">
+            <div class="menu-button" aria-label="Toggle menu" onclick="toggleMenu()">
+                <img src="{% static 'icons/whitehammenu.png' %}" alt="Menu" class="hamburgerbutton">
+            </div>
+            <div class="menu" id="sideMenu">
+                <ul>
+                    <li class="option"><a href="/">Home<img src="{% static 'icons/home_icon.png' %}" class="menu_icon" alt="Home"></a></li>
+                    <li class="option"><a href="feed.html">Feed<img src="{% static 'icons/feed_icon.png' %}" class="menu_icon" alt="Feed"></a></li>
+                    <li class="option"><a href="/profile/{{ user.username }}">Your profile<img src="{{user_profile.profileimg.url}}" class="sub_icon" alt="Profile"></a></li>
+                    <li class="break"></li>
+                    <p>Subscriptions</p>
+                    {% if subscriptions %}
+                        {% for sub in subscriptions %}
+                            <li class="option">
+                                <a href="/profile/{{ sub.username }}">
+                                    {{ sub.username }}
+                                    <img src="{{ sub.profile_img }}" class="sub_icon" alt="Profile">
+                                </a>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <li class="option">
+                            <p>No subscriptions yet</p>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <h1><a href="/">Cosmical</a></h1>
+    </header>
+    
+    <div class="search-container">
+        <form action="/search" method="POST"> 
+        {% csrf_token %}
+        <input type="text" id="searchInput" placeholder="Search..." aria-label="Search" name="username">
+        <button onclick="redirectToPage()">Search</button>
+        <ul id="searchResults" class="search-results"></ul>
+        </form>
+    </div>
+    
+    <div class="toolbar">
+        <div class="inbox-btn" id="inboxButton">
+            <a href="{% url 'inbox' %}"><i class="fas fa-inbox"></i></a>
+            <span class="notification-badge">3</span>
+        </div>
+
+        <div class="notification-btn" id="uplnotificationButton">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+        </div>        
+        <div class="your-profile" id="profileButton">
+            <div class="profile_icon">
+                <img src="{{ user_profile.profileimg.url|default:'/static/images/profileimage.png' }}" id="your_profile_image" class="home_profile_icon" alt="Profile">
+            </div>
+        </div>
+    </div>
+    
+<!-- Profile Icon Menu with Authentication Logic -->
+<div id="profile-icon-menu" class="profile-icon-menu">
+    {% if user.is_authenticated %}
+        <ul>
+            <li><a href="/profile/{{ user.username }}">Your Profile</a></li>
+            <li><a href="/settings">Account Settings</a></li>
+            <li><a href="/saved">Saved Posts</a></li>
+            <li><a href="/notifications">Notifications</a></li>
+            <li class="separator"></li>
+            <li><a href="/logout">Log Out</a></li>
+            <li><a href="/help">Help Center</a></li>
+        </ul>
+    {% else %}
+        <ul>
+            <li><a href="/login">Log In</a></li>
+            <li><a href="/register">Register</a></li>
+            <li><a href="/help">Help Center</a></li>
+        </ul>
+    {% endif %}
+</div>
+
+<!-- Notifications Dropdown -->
+<div id="notifications-dropdown" class="notifications-dropdown">
+    <h4>Notifications</h4>
+    <ul class="notification-list">
+        <li class="notification-item unread">
+            <div class="notification-avatar">
+                <img src="/static/icons/profile_icon.png" alt="User">
+            </div>
+            <div class="notification-content">
+                <p><strong>CosmicExplorer</strong> liked your post</p>
+                <span class="notification-time">2 minutes ago</span>
+            </div>
+        </li>
+        <li class="notification-item unread">
+            <div class="notification-avatar">
+                <img src="/static/icons/profile_icon.png" alt="User">
+            </div>
+            <div class="notification-content">
+                <p><strong>StarGazer</strong> mentioned you in a comment</p>
+                <span class="notification-time">1 hour ago</span>
+            </div>
+        </li>
+    </ul>
+
+</div>
+
+    <!-- Profile Icon Menu with Authentication Logic -->
+    <div id="profile-icon-menu" class="profile-icon-menu">
+        {% if user.is_authenticated %}
+            <ul>
+                <li><a href="/profile/{{ user.username }}">Your Profile</a></li>
+                <li><a href="/settings">Account Settings</a></li>
+                <li><a href="/saved">Saved Posts</a></li>
+                <li><a href="/notifications">Notifications</a></li>
+                <li class="separator"></li>
+                <li><a href="/logout">Log Out</a></li>
+                <li><a href="/help">Help Center</a></li>
+            </ul>
+        {% else %}
+            <ul>
+                <li><a href="/login">Log In</a></li>
+                <li><a href="/register">Register</a></li>
+                <li><a href="/help">Help Center</a></li>
+            </ul>
+        {% endif %}
+    </div>
+
+
+
+    <footer>
+        <p>&copy; 2024 Cosmical. All rights reserved.</p>
+    </footer>
+    
+    <script src="{% static 'javascript/javascript.js' %}"></script>
+</body>
+</html>

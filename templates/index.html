@@ -1,0 +1,300 @@
+{% load static %}
+{% load custom_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmical</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="icon" href="{% static 'icons/favicon.png' %}" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="nebula-background">
+        <div class="nebula-layer nebula-blue"></div>
+        <div class="nebula-layer nebula-purple"></div>
+        <div class="nebula-layer nebula-teal"></div>
+    </div>
+    <div class="stars-overlay"></div>
+    <div class="dust-particles"></div>
+    <header>        
+        <div class="menu-container">
+            <div class="menu-button" aria-label="Toggle menu" onclick="toggleMenu()">
+                <img src="{% static 'icons/whitehammenu.png' %}" alt="Menu" class="hamburgerbutton">
+            </div>
+            <div class="menu" id="sideMenu">
+                <ul>
+                    <li class="option"><a href="/">Home<img src="{% static 'icons/home_icon.png' %}" class="menu_icon" alt="Home"></a></li>
+                    <li class="option"><a href="feed.html">Feed<img src="{% static 'icons/feed_icon.png' %}" class="menu_icon" alt="Feed"></a></li>
+                    <li class="option"><a href="/profile/{{ user.username }}">Your profile<img src="{{user_profile.profileimg.url}}" class="sub_icon" alt="Profile"></a></li>
+                    <li class="break"></li>
+                    <p>Subscriptions</p>
+                    {% if subscriptions %}
+                        {% for sub in subscriptions %}
+                            <li class="option">
+                                <a href="/profile/{{ sub.username }}">
+                                    {{ sub.username }}
+                                    <img src="{{ sub.profile_img }}" class="sub_icon" alt="Profile">
+                                </a>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <li class="option">
+                            <p>No subscriptions yet</p>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <h1><a href="/">Cosmical</a></h1>
+    </header>
+    
+    <div class="search-container">
+        <form action="/search" method="POST"> 
+        {% csrf_token %}
+        <input type="text" id="searchInput" placeholder="Search..." aria-label="Search" name="username">
+        <button onclick="redirectToPage()">Search</button>
+        <ul id="searchResults" class="search-results"></ul>
+        </form>
+    </div>
+    
+    <div class="toolbar">
+        <div class="inbox-btn" id="inboxButton">
+            <a href="{% url 'inbox' %}"><i class="fas fa-inbox"></i></a>
+            <span class="notification-badge">3</span>
+        </div>
+
+        <div class="notification-btn" id="uplnotificationButton">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">{{ notifications.count }}</span>
+        </div>        
+        <div class="your-profile" id="profileButton">
+            <div class="profile_icon">
+                <img src="{{ user_profile.profileimg.url|default:'/static/images/profileimage.png' }}" id="your_profile_image" class="home_profile_icon" alt="Profile">
+            </div>
+        </div>
+    </div>
+    
+<!-- Profile Icon Menu with Authentication Logic -->
+<div id="profile-icon-menu" class="profile-icon-menu">
+    {% if user.is_authenticated %}
+        <ul>
+            <li><a href="/profile/{{ user.username }}">Your Profile</a></li>
+            <li><a href="/settings">Account Settings</a></li>
+            <li><a href="/saved">Saved Posts</a></li>
+            <li><a href="/notifications">Notifications</a></li>
+            <li class="separator"></li>
+            <li><a href="/logout">Log Out</a></li>
+            <li><a href="/help">Help Center</a></li>
+        </ul>
+    {% else %}
+        <ul>
+            <li><a href="/login">Log In</a></li>
+            <li><a href="/register">Register</a></li>
+            <li><a href="/help">Help Center</a></li>
+        </ul>
+    {% endif %}
+</div>
+
+<!-- Notifications Dropdown -->
+<div id="notifications-dropdown" class="notifications-dropdown">
+    <h4>Notifications</h4>
+    <ul class="notification-list">
+        <li class="notification-item unread">
+            <div class="notification-avatar">
+                <img src="/static/icons/profile_icon.png" alt="User">
+            </div>
+            <div class="notification-content">
+                <p><strong>CosmicExplorer</strong> liked your post</p>
+                <span class="notification-time">2 minutes ago</span>
+            </div>
+        </li>
+        <li class="notification-item unread">
+            <div class="notification-avatar">
+                <img src="/static/icons/profile_icon.png" alt="User">
+            </div>
+            <div class="notification-content">
+                <p><strong>StarGazer</strong> mentioned you in a comment</p>
+                <span class="notification-time">1 hour ago</span>
+            </div>
+        </li>
+    </ul>
+</div>
+
+    <!-- Profile Icon Menu with Authentication Logic -->
+    <div id="profile-icon-menu" class="profile-icon-menu">
+        {% if user.is_authenticated %}
+            <ul>
+                <li><a href="/profile/{{ user.username }}">Your Profile</a></li>
+                <li><a href="/settings">Account Settings</a></li>
+                <li><a href="/saved">Saved Posts</a></li>
+                <li><a href="/notifications">Notifications</a></li>
+                <li class="separator"></li>
+                <li><a href="/logout">Log Out</a></li>
+                <li><a href="/help">Help Center</a></li>
+            </ul>
+        {% else %}
+            <ul>
+                <li><a href="/login">Log In</a></li>
+                <li><a href="/register">Register</a></li>
+                <li><a href="/help">Help Center</a></li>
+            </ul>
+        {% endif %}
+    </div>
+
+            <!-- You can add more sidebar components here -->
+            <div class="quote-container">
+                <p id="quote"></p>
+            </div>
+
+    <div class="main-content">
+        <!-- Left column for posts -->
+        <div class="content-column">
+            <!-- Create Post Section -->
+            <div class="create-post">
+                <div class="create-post-container">
+                    <form action="{% url 'upload' %}" method="POST" enctype="multipart/form-data" class="create-post-form">
+                        {% csrf_token %}
+                        <div class="create-post-top">
+                            <textarea name="caption" class="create-post-textarea" placeholder="What's on your mind?" maxlength="280" required></textarea>
+                        </div>
+                        <div class="create-post-bottom">
+                            <label for="image-upload" class="image-upload-label">
+                                <i class="fas fa-camera"></i>&nbspAdd Image
+                            </label>
+                            <input type="file" id="image-upload" name="image_upload" accept="image/*" class="image-upload-input">
+                            <button type="submit" class="submit-post-button">
+                                <i class="fas fa-paper-plane"></i>&nbspPost
+                            </button>
+                        </div>
+                        <div id="image-preview-container" style="display:none; margin-top: 10px; position: relative;">
+                            <img id="image-preview" src="#" alt="Image Preview" style="max-width: 100%; border-radius: var(--border-radius-standard);"/>
+                            <button type="button" id="cancel-image-upload" class="cancel-image-button">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>             
+                    </form>
+                </div>
+            </div>
+            
+<!-- User Posts Feed -->
+<div class="posts-feed">
+    <div class="posts-feed-container">
+        {% for post in posts %}
+        <div class="post-card">
+            <div class="post-card-header">
+                <img src="{{post.get_user_profile_img|default:'/static/images/profileimage.png' }}" class="post-avatar">
+                <div class="post-user-info">
+                    <a href="/profile/{{post.user}}">
+                        <span class="post-username">{{post.user}}</span>
+                    </a>
+                    <span class="post-time">{{ post.created_at|date:"F d, Y, g:i a" }}</span>
+                </div>
+                <!-- Post Settings Button -->
+                <button class="post-settings-button" aria-label="Post settings" data-post-id="{{ post.id }}">
+                    <i class="fas fa-ellipsis-vertical"></i>
+                </button>
+                <!-- Post Settings Dropdown -->
+                <div class="post-settings-dropdown" id="post-settings-{{ post.id }}">
+                    <ul>
+                        {% if post.user == user.username %}
+                        <!-- Options for post owner -->
+                        <li class="edit-post" data-post-id="{{ post.id }}"><i class="fas fa-edit"></i> Edit Post</li>
+                        <li class="delete-post" data-post-id="{{ post.id }}"><i class="fas fa-trash danger"></i> Delete Post</li>
+                        <li class="separator"></li>
+                        {% endif %}
+                        <!-- Options for all users -->
+                        <li class="save-post" data-post-id="{{ post.id }}"><i class="fas fa-bookmark"></i> Save Post</li>
+                        <li class="copy-link" data-post-id="{{ post.id }}"><i class="fas fa-link"></i> Copy Link</li>
+                        <li class="separator"></li>
+                        <li class="report-post" data-post-id="{{ post.id }}"><i class="fas fa-flag danger"></i> Report Post</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="post-card-body">
+                <p class="post-caption">{{ post.caption }}</p>
+                {% if post.image %}
+                <div class="post-image-container">
+                    <a href="{{post.image.url}}">
+                        <img src="{{ post.image.url }}" alt="Post Image" class="post-image">
+                    </a>
+                    <a href="{{post.image.url}}" download class="download-icon" title="Download image">
+                        <i class="fas fa-download"></i>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="post-card-footer">
+                <a href="/like-post?post_id={{post.id}}">
+                    <button class="like-button">
+                        <i class="fas fa-heart"></i>
+                        <span class="like-count">{{post.no_of_likes}}</span>
+                    </button>
+                </a>
+                <button class="comment-button">
+                    <i class="fas fa-comment"></i>
+                </button>
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+</div>
+        </div>
+        
+        <!-- Right column for sidebar content -->
+        <div class="sidebar-column">
+            <!-- Recommended Users Section -->
+            <div class="recommended-users">
+                <div class="recommended-users-container">
+                    <h3>Recommended Users</h3>
+                    <div class="recommended-users-list">
+                        <!-- These would be dynamically populated from your backend -->
+                        {% for suggestion in suggestions_username_profile_list %}
+                        <div class="recommended-user-card">
+                            <a href="/profile/{{suggestion.user}}">
+                            <img src="{{suggestion.profileimg.url|default:'/static/images/profileimage.png' }}" class="recommended-user-avatar">
+                            </a>
+                            <div class="recommended-user-info">
+                                <a href="/profile/{{suggestion.user}}" class="recommended-username">{{suggestion.user}}</a>
+                                <span class="recommended-user-bio">{{suggestion.bio}}</span>
+                            </div>
+                            <form action="{% url 'follow' %}" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{user.username}}" name="follower" />
+                                <input type="hidden" value="{{suggestion.user}}" name="user" />
+                                <input type="hidden" value="/" name="redirect_url" />
+                                
+                                {% if suggestion.user in followed_users %}
+                                <button class="follow-button unsubscribe" type="submit">Unsubscribe</button>
+                                {% else %}
+                                <button class="follow-button" type="submit">Subscribe</button>
+                                {% endif %}
+                            </form>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <form action="/search" method="POST"> 
+                    {% csrf_token %}
+                    <button onclick="redirectToPage()" class="see-more-button">See More</button>
+                    <ul id="searchResults" class="search-results"></ul>
+                    </form>
+                </div>
+            </div>
+            
+
+        </div>
+        
+    </div>
+
+
+    <footer>
+        <p>&copy; 2024 Cosmical. All rights reserved.</p>
+    </footer>
+    
+    <script src="{% static 'javascript/javascript.js' %}"></script>
+</body>
+</html>

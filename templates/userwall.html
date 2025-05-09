@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Cosmical</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>        
+        <div class="menu-container">
+            <div class="menu-button" onclick="toggleMenu()">
+                <img src="icons/whitehammenu.png" alt="Hamburger Button" class="hamburgerbutton">
+            </div>
+            
+            <div class="menu">
+                <ul>
+                    <li class="option"><a href="index.html">Home<img src="icons/home_icon.png" class="menu_icon"></a></li>
+                    <li class="option"><a href="feed.html">Feed<img src="icons/feed_icon.png" class="menu_icon"></a></li>
+                    <li class="option"><a href="userwall.html">Your profile<img src="icons/profile_icon.png" class="menu_icon"></a></li>
+                    <li class="option"><a href="forums.html">Forums<img src="icons/forums_icon.png" class="menu_icon"></a></li>
+                    <li class="break"></li>
+                    <p>Topics</p>
+                    <li class="option"><a href="astronomy.html">Astronomy<img src="icons/astronomy_icon.png" class="menu_icon"></a></li>
+                    <li class="option"><a href="physics.html">Physics<img src="icons/physics_icon.png" class="menu_icon"></a></li>
+                    <li class="option"><a href="cosmology.html">Cosmology<img src="icons/cosmology_icon.png" class="menu_icon"></a></li>
+                    <li class="option"><a href="planetary_science.html">Planetary Science<img src="icons/planetary_science_icon.png" class="menu_icon"></a></li>
+                    <li class="option"><a href="computer_science.html">Computer Science<img src="icons/computer_science_icon.png" class="menu_icon"></a></li>
+                    <li class="option"><a href="engineering.html">Engineering<img src="icons/engineering_icon.png" class="menu_icon"></a></li>
+                    <li class="break"></li>
+                    <p>Subscriptions</p>
+                    <li class="option"><a href="#">Callum<img src="icons/profile_icon.png" class="menu_icon"></a></li>
+                    <li class="option"><a href="#">Cameron<img src="icons/profile_icon.png" class="menu_icon"></a></li>
+                    <li class="option"><a href="#">Jay<img src="icons/profile_icon.png" class="menu_icon"></a></li>
+                    <li class="option"><a href="#">Cooper<img src="icons/profile_icon.png" class="menu_icon"></a></li>
+                </ul>
+            </div>
+        </div>
+        <h1><a href="index.html">Cosmical</a></h1>
+    </header>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <button onclick="redirectToPage()">Search</button>
+    </div>
+
+    <div class="your-profile">
+        <p>This is your profile</p>
+        <div class="profile_icon"></div>
+    </div>
+
+    <section class="profile">
+        <div class="bannerandprofile">
+            <div class="banner">
+                <img src="" class="bannerimage">
+            </div>
+            <div class="wall_profile_icon">
+                <img src="images/clogoinverted.png" class="wall_profile_icon_image">
+            </div>
+        </div>
+
+        <div class="user-wall">
+            <div class="user-info">
+                <div class="user-name-subscribe">
+                    <h2>UserName</h2>
+                    <div class="subscribe-button">
+                        <button>Subscribe</button>
+                    </div>
+                </div>
+                <h5>@UserName</h5>
+                <ul class="join-date">
+                    <li><img src="icons/calendar.png" class="calender-icon"></li>
+                    <li><h5>Joined on: 07th March 2024</h5></li>
+                </ul>
+                <div class="user-bio">
+                    <div class="break"></div>
+                    <p>This is an example of a user bio. This user is a passionate space enthusiast with a background in astrophysics, software engineering, and cyber security.</p>
+                    <ul class="channel-info">
+                        <li><p><strong>100</strong> Followers</p></li>
+                        <li><p><strong>100</strong> Following</p></li>
+                        <li><p><strong>113</strong> Posts</p></li>
+                        <li><p><strong>113</strong> Videos</p></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="posts">
+                <div class="break"></div>
+                <ul class="profile-nav">
+                    <li><a href="userwall.html" class="profile-pages"><h1>Posts</h1></a></li>
+                    <li><a href="uservideos.html" class="profile-pages"><h1>Videos</h1></a></li>
+                    <li><a href="usershorts.html" class="profile-pages"><h1>Shorts</h1></a></li>
+                    <li><a href="#" class="profile-pages"><h1>Achievements</h1></a></li>
+                    <li><a href="#" class="profile-pages"><h1>About</h1></a></li>
+                </ul>
+                <div class="break"></div>
+
+                <div class="post">
+                    <span class="post-names">
+                        <h3>Username</h3>
+                        <img src="images/profileimage.png" class="post-profile-icon">
+                        <h4>@Username</h4>
+                    </span>
+                    <p>This is a sample post on the user wall. Feel free to post your thoughts and updates!</p>
+                    <div class="posted-date">
+                        <small>Posted on: March 2, 2024</small>
+                    </div>
+                    <ul class="user-feedback">
+                        <li><img src="icons/like.png" class="feedback-icon"></li>
+                        <li><img src="icons/dislike.png" class="feedback-icon"></li>
+                        <li><img src="icons/post_comment.png" class="feedback-icon"></li>
+                    </ul>
+                </div>
+
+                <div class="post">
+                    <span class="post-names">
+                        <h3>Username</h3>
+                        <img src="images/profileimage.png" class="post-profile-icon">
+                        <h4>@Username</h4>
+                    </span>
+                    <p>This is another sample post on the user wall. Feel free to post your thoughts and updates!</p>
+                    <div class="posted-date">
+                        <small>Posted on: March 2, 2024</small>
+                    </div>
+                    <ul class="user-feedback">
+                        <li><img src="icons/like.png" class="feedback-icon"></li>
+                        <li><img src="icons/dislike.png" class="feedback-icon"></li>
+                        <li><img src="icons/post_comment.png" class="feedback-icon"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Cosmical. All rights reserved.</p>
+        <img src="icons/musiciconwhite.png" class="music-icon">
+    </footer>
+
+    <script src="javascript.js"></script>
+</body>
+</html>

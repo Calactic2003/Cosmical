@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmical - Explore the Universe</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>        
+        <div class="menu-container">
+        <div class="menu-button" onclick="toggleMenu()">
+            <img src="icons/whitehammenu.png" alt="Hamburger Button" class="hamburgerbutton">
+        </div>
+        
+        <div class="menu">
+          <!-- Your menu items here -->
+          <ul>
+            <li class = "option"><a href="index.html">Home<img src="icons/home_icon.png" class = "menu_icon"></a></li>
+
+            <li class = "option"><a href="feed.html">Feed<img src="icons/feed_icon.png" class = "menu_icon"></a></li>
+
+            <li class = "option"><a href="userwall.html">Your profile<img src="icons/profile_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="forums.html">Forums<img src="icons/forums_icon.png" class = "menu_icon"></a></li>
+
+            <li class = "break"></li>
+            <p>Topics</p>
+            <li class = "option">
+                <a href="astronomy.html">Astronomy<img src="icons/astronomy_icon.png" class = "menu_icon"></a>
+
+            </li>
+            <li class = "option">
+                <a href="physics.html">Physics<img src="icons/physics_icon.png" class = "menu_icon"></a>
+            </li>
+            <li class = "option"><a href="cosmology.html">Cosmology<img src="icons/cosmology_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="planetary_science.html">Planetary Science<img src="icons/planetary_science_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="computer_science.html">Computer Science<img src="icons/computer_science_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="engineering.html">Engineering<img src="icons/engineering_icon.png" class = "menu_icon"></a></li>
+
+            <li class = "break"></li>
+            <p>Subscriptions</p>
+            <li class = "option"><a href="#">Callum<img src="icons/profile_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="#">Cameron<img src="icons/profile_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="#">Jay<img src="icons/profile_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="#">Cooper<img src="icons/profile_icon.png" class = "menu_icon"></a></li>
+        </ul>
+        </div>
+      </div>
+        <h1><a href = 'index.html'> Cosmical</a></h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search...">
+            <button onclick="redirectToPage()">Search</button>
+        </div>
+        
+    
+        <ul id="searchResults"></ul>
+
+        <nav>
+            <ul class>
+                <li ><a href="feed.html" class = "tab">Feed</a></li>
+                <li ><a href="topics.html" class = "tab">Topics</a></li>
+                <li ><a href="#" class = "tab">Forums</a></li>
+                <li ><a href="aboutus.html" class = "tab">About</a></li>
+                <li ><a href="#" class = "tab">Contact</a></li>
+                <li class="profile-btn">
+                    <a href="#" class ="profile-btn-link">Profile</a>
+                    <div class="dropdown-content">
+                        <a href="userwall.html">User Wall</a>
+                        <a href="#">Settings</a>
+                        <a href="#">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    
+
+<section class="container">
+    <section class="forums-feed">
+        <h1>Forums</h1>
+        <div class = "break"></div>
+        <section class="forum">
+            <div class = "forum-post">
+                <h1>General</h1>
+            </div>
+            <div class = "forum-post">
+                <h1>Astronomy</h1>
+            </div>
+            <div class = "forum-post">
+                <h1>Astrophysics</h1>
+            </div>
+            <div class = "forum-post">
+                <h1></h1>
+            </div>
+            <div class ="break"></div>
+        </section>
+    </section>
+    <section class="quick-menu">
+        <h1>Quick Menu</h1>
+        <div class = "break"></div>
+        <section class = "quick-menu-content">
+        <section class="hot-posts">
+            <h1 class = "quick-menu-subheading">Hot</h1>
+            <h5>This is a hot posts</h5>
+            <h5>This is a hot posts</h5>
+            <h5>This is a hot posts</h5>
+        </section>
+        <section class="recent-posts">
+            <div class = "break"></div>
+            <h1 class = "quick-menu-subheading">Recent</h1>
+            <h5>This is a recent post</h5>
+            <h5>This is a recent post</h5>
+            <h5>This is a recent post</h5>
+        </section>
+    </section>
+            <!-- Quick menu content goes here -->
+
+    </section>
+</section>
+    <footer>
+        <p>&copy; 2024 Cosmical. All rights reserved.</p>
+        <img src="icons/musiciconwhite.png" class = "music-icon"></p>
+    </footer>
+    <script src="javascript.js"></script>
+</body>
+</html>

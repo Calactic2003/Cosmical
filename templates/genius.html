@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmical - Physics</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>  
+        <div class="menu-container">
+        <div class="menu-button" onclick="toggleMenu()">
+            <img src="icons/whitehammenu.png" alt="Hamburger Button" class="hamburgerbutton">
+        </div>
+        
+        <div class="menu">
+          <!-- Your menu items here -->
+          <ul>
+            <li class = "option"><a href="index.html">Home<img src="icons/home_icon.png" class = "menu_icon"></a></li>
+
+            <li class = "option"><a href="feed.html">Feed<img src="icons/feed_icon.png" class = "menu_icon"></a></li>
+
+            <li class = "option"><a href="userwall.html">Your profile<img src="icons/profile_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="forums.html">Forums<img src="icons/forums_icon.png" class = "menu_icon"></a></li>
+
+            <li class = "break"></li>
+            <p>Topics</p>
+            <li class = "option">
+                <a href="astronomy.html">Astronomy<img src="icons/astronomy_icon.png" class = "menu_icon"></a>
+
+            </li>
+            <li class = "option">
+                <a href="physics.html">Physics<img src="icons/physics_icon.png" class = "menu_icon"></a>
+            </li>
+            <li class = "option"><a href="cosmology.html">Cosmology<img src="icons/cosmology_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="planetary_science.html">Planetary Science<img src="icons/planetary_science_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="computer_science.html">Computer Science<img src="icons/computer_science_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="engineering.html">Engineering<img src="icons/engineering_icon.png" class = "menu_icon"></a></li>
+
+            <li class = "break"></li>
+            <p>Subscriptions</p>
+            <li class = "option"><a href="#">Callum<img src="icons/profile_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="#">Cameron<img src="icons/profile_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="#">Jay<img src="icons/profile_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="#">Cooper<img src="icons/profile_icon.png" class = "menu_icon"></a></li>
+        </ul>
+        </div>
+      </div>
+        <h1><a href = 'index.html'> Cosmical</a></h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search...">
+            <button onclick="redirectToPage()">Search</button>
+        </div>
+        
+    
+        <ul id="searchResults"></ul>
+
+        <nav>
+            <ul class>
+                <li ><a href="feed.html" class = "tab">Feed</a></li>
+                <li ><a href="topics.html" class = "tab">Topics</a></li>
+                <li ><a href="#" class = "tab">Forums</a></li>
+                <li ><a href="aboutus.html" class = "tab">About</a></li>
+                <li ><a href="#" class = "tab">Contact</a></li>
+                <li class="profile-btn">
+                    <a href="#" class ="profile-btn-link">Profile</a>
+                    <div class="dropdown-content">
+                        <a href="userwall.html">User Wall</a>
+                        <a href="#">Settings</a>
+                        <a href="#">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="physics-home">
+        <div class="physics-header">
+            <img src ="images/physics.jpg">
+            <h1>Genius</h1>
+        </div>
+
+        <div class ="break"></div>
+        <section class ="physics-desc">
+            <h2>What is Physics?</h2>
+            <br>
+        <p>
+            Physics is the fundamental science that seeks to understand the natural world and the underlying principles governing it. It encompasses a broad spectrum of phenomena, from the tiniest subatomic particles to the vast expanses of the universe. At its core, physics strives to uncover the basic laws and rules that govern the behavior of matter, energy, space, and time.
+        </p>
+        <br>
+        <p>
+            Through observation, experimentation, and mathematical analysis, physicists explore the intricacies of the universe, seeking to answer fundamental questions about its origins, structure, and evolution. The discipline is characterized by its rigorous methodology, which involves formulating hypotheses, testing them through experiments, and refining theories based on empirical evidence.
+        </p>
+        
+    </section>
+    <div class = "break"></div>
+        <ul class="physics-subsets">
+            <h2>Subsets</h2>
+            <br>
+            <li><strong>Classical Mechanics:</strong> Deals with the motion of macroscopic objects under the influence of forces. It encompasses the study of Newton's laws of motion, which describe the relationship between the motion of an object and the forces acting upon it. Classical mechanics also includes the study of conservation laws, such as the conservation of energy and momentum. This branch of physics provides fundamental principles for understanding the behavior of everyday objects, from the motion of planets and satellites to the dynamics of machinery and vehicles.</li>
+            <div class = "break"></div>
+            
+            <li><strong>Electromagnetism:</strong> The branch of physics that studies the interaction between electric charges and magnetic fields. It encompasses Maxwell's equations, which describe how electric and magnetic fields are generated by charges and currents, as well as how these fields propagate through space as electromagnetic waves. Electromagnetism explains phenomena such as electric and magnetic forces, electromagnetic induction, and the behavior of light. It is crucial for understanding a wide range of phenomena, including the operation of electronic devices, the behavior of atoms and molecules, and the properties of light and radiation.</li>
+            <div class = "break"></div>
+
+            <li><strong>Thermodynamics:</strong> The study of the relationships between heat, energy, and work. It explores how energy is transferred between systems as heat and work, and how this affects the properties of matter. Thermodynamics encompasses principles such as the laws of thermodynamics, which describe the behavior of heat and energy in systems undergoing processes such as heating, cooling, and expansion. It also includes concepts such as entropy, which quantifies the disorder or randomness of a system. Thermodynamics is essential for understanding the behavior of gases, liquids, and solids, as well as for designing engines, refrigeration systems, and other energy-related devices.</li>
+            <div class = "break"></div>
+
+            <li><strong>Quantum Mechanics:</strong> The branch of physics that describes the behavior of matter and energy at the smallest scales, such as atoms and subatomic particles. It introduces the concept of quantization, where certain properties such as energy and angular momentum can only take on discrete values. Quantum mechanics encompasses principles such as wave-particle duality, which states that particles such as electrons exhibit both wave-like and particle-like behavior. It also includes the famous Schrödinger equation, which describes how the quantum state of a system evolves over time. Quantum mechanics is essential for understanding phenomena such as atomic and molecular structure, particle interactions, and the behavior of materials at the nanoscale.</li>
+            <div class = "break"></div>
+
+            <li><strong>Relativity (Special and General):</strong> The branch of physics that deals with the behavior of objects moving at speeds close to the speed of light or in gravitational fields. Special relativity, developed by Albert Einstein, describes how measurements of space and time depend on the relative motion between observers and introduces concepts such as time dilation and length contraction. General relativity extends these ideas to include the effects of gravity, describing how mass and energy curve spacetime and influence the motion of objects. Relativity is crucial for understanding phenomena such as black holes, gravitational waves, and the large-scale structure of the universe.</li>
+            <div class = "break"></div>
+
+            <li><strong>Particle Physics:</strong> The branch of physics that studies the fundamental constituents of matter and the forces that govern their interactions. It explores the properties and behavior of particles such as quarks, leptons, and gauge bosons, as well as the fundamental forces of nature, including the electromagnetic, weak, and strong nuclear forces, and gravity. Particle physics involves experiments conducted at particle accelerators and detectors to probe the fundamental nature of matter and energy, seeking to uncover new particles and understand the underlying symmetries and principles of the universe.</li>
+            <div class = "break"></div>
+
+            <li><strong>Astrophysics:</strong> The branch of physics that applies the principles of physics to the study of celestial objects and phenomena. It encompasses the study of stars, galaxies, planets, and the universe as a whole, as well as phenomena such as supernovae, black holes, and cosmic radiation. Astrophysics explores the properties and evolution of celestial objects, the structure and dynamics of galaxies and the universe, and the origin and fate of the cosmos. It involves observations and measurements conducted using telescopes, satellites, and other instruments to understand the nature and behavior of objects and phenomena beyond Earth.</li>
+        </ul>
+    </section>
+    
+    
+    
+</section>     
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Cosmical. All rights reserved.</p>
+        <img src="icons/musiciconwhite.png" class = "music-icon"></p>
+    </footer>
+    <script src="javascript.js"></script>
+</body>
+</html>

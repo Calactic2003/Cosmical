@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmical - Physics</title>
+    <link rel="stylesheet" href="styles.css">
+
+
+      
+</head>
+<body>
+    <header>  
+        <div class="menu-container">
+        <div class="menu-button" onclick="toggleMenu()">
+            <img src="icons/whitehammenu.png" alt="Hamburger Button" class="hamburgerbutton">
+        </div>
+        
+        <div class="menu">
+          <!-- Your menu items here -->
+          <ul>
+            <li class = "option"><a href="index.html">Home<img src="icons/home_icon.png" class = "menu_icon"></a></li>
+
+            <li class = "option"><a href="feed.html">Feed<img src="icons/feed_icon.png" class = "menu_icon"></a></li>
+
+            <li class = "option"><a href="userwall.html">Your profile<img src="icons/profile_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="forums.html">Forums<img src="icons/forums_icon.png" class = "menu_icon"></a></li>
+
+            <li class = "break"></li>
+            <p>Topics</p>
+            <li class = "option">
+                <a href="astronomy.html">Astronomy<img src="icons/astronomy_icon.png" class = "menu_icon"></a>
+
+            </li>
+            <li class = "option">
+                <a href="physics.html">Physics<img src="icons/physics_icon.png" class = "menu_icon"></a>
+            </li>
+            <li class = "option"><a href="cosmology.html">Cosmology<img src="icons/cosmology_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="planetary_science.html">Planetary Science<img src="icons/planetary_science_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="computer_science.html">Computer Science<img src="icons/computer_science_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="engineering.html">Engineering<img src="icons/engineering_icon.png" class = "menu_icon"></a></li>
+
+            <li class = "break"></li>
+            <p>Subscriptions</p>
+            <li class = "option"><a href="#">Callum<img src="icons/profile_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="#">Cameron<img src="icons/profile_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="#">Jay<img src="icons/profile_icon.png" class = "menu_icon"></a></li>
+            <li class = "option"><a href="#">Cooper<img src="icons/profile_icon.png" class = "menu_icon"></a></li>
+        </ul>
+        </div>
+      </div>
+        <h1><a href = 'index.html'> Cosmical</a></h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search...">
+            <button onclick="redirectToPage()">Search</button>
+        </div>
+        
+    
+        <ul id="searchResults"></ul>
+
+        <nav>
+            <ul class>
+                <li ><a href="feed.html" class = "tab">Feed</a></li>
+                <li ><a href="topics.html" class = "tab">Topics</a></li>
+                <li ><a href="#" class = "tab">Forums</a></li>
+                <li ><a href="aboutus.html" class = "tab">About</a></li>
+                <li ><a href="#" class = "tab">Contact</a></li>
+                <li class="profile-btn">
+                    <a href="#" class ="profile-btn-link">Profile</a>
+                    <div class="dropdown-content">
+                        <a href="userwall.html">User Wall</a>
+                        <a href="#">Settings</a>
+                        <a href="#">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="physics-home">
+        <div class="physics-header">
+            <img src ="images/physics.jpg">
+            <h1>Physics</h1>
+        </div>
+
+        <div class ="break"></div>
+        <section class ="physics-desc">
+            <h2>What is Physics?</h2>
+            <br>
+        <p>
+            Physics is the fundamental science that seeks to understand the natural world and the underlying principles governing it. It encompasses a broad spectrum of phenomena, from the tiniest subatomic particles to the vast expanses of the universe. At its core, physics strives to uncover the basic laws and rules that govern the behavior of matter, energy, space, and time.
+        </p>
+        <br>
+        <p>
+            Through observation, experimentation, and mathematical analysis, physicists explore the intricacies of the universe, seeking to answer fundamental questions about its origins, structure, and evolution. The discipline is characterized by its rigorous methodology, which involves formulating hypotheses, testing them through experiments, and refining theories based on empirical evidence.
+        </p>
+        
+    </section>
+    <div class = "break"></div>
+
+    </section>
+    <div class="physics-subsets">
+        <h2>Subsets</h2>
+        <div class="row">
+            <div class="card">
+                <img src="images/astronomy.jpg" alt="Classical Mechanics">
+                <h3>Classical Mechanics</h3>
+                <p>Deals with the motion of macroscopic objects under the influence of forces.</p>
+            </div>
+            <div class="card">
+                <img src="images/astronomy.jpg" alt="Electromagnetism">
+                <h3>Electromagnetism</h3>
+                <p>Studies the interaction between electric charges and magnetic fields.</p>
+            </div>
+            <div class="card">
+                <img src="images/astronomy.jpg" alt="Thermodynamics">
+                <h3>Thermodynamics</h3>
+                <p>Explores the relationships between heat, energy, and work.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card">
+                <img src="images/astronomy.jpg" alt="Quantum Mechanics">
+                <h3>Quantum Mechanics</h3>
+                <p>Describes the behavior of matter and energy at the smallest scales.</p>
+            </div>
+            <div class="card">
+                <img src="images/astronomy.jpg" alt="Relativity">
+                <h3>Relativity</h3>
+                <p>Deals with the behavior of objects moving at high speeds or in gravitational fields.</p>
+            </div>
+            <div class="card">
+                <img src="images/astronomy.jpg" alt="Particle Physics">
+                <h3>Particle Physics</h3>
+                <p>Studies the fundamental constituents of matter and their interactions.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card">
+                <img src="images/astronomy.jpg" alt="Astrophysics">
+                <h3>Astrophysics</h3>
+                <p>Applies the principles of physics to the study of celestial objects and phenomena.</p>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+</section>     
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Cosmical. All rights reserved.</p>
+        <img src="icons/musiciconwhite.png" class = "music-icon"></p>
+    </footer>
+    <script src="javascript.js"></script>
+</body>
+</html>
